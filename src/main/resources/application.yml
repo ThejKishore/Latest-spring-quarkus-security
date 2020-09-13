@@ -1,0 +1,65 @@
+# Configuration file
+# key = value
+
+
+greeting:
+  user:
+    msg: bonjure
+  msg: bonjure Shanaya
+
+
+quarkus:
+  http:
+    port: 9010
+    auth:
+      basic: true
+  security:
+    users:
+      embedded:
+        users:
+          thej: kishore
+          shanaya: karuneegar
+        roles:
+          thej: user
+          shanaya: admin
+        enabled: true
+        plain-text: true
+  datasource:
+    username: user
+    password: password
+    jdbc:
+      ~: true
+#      driver: org.h2.Driver
+#      url: jdbc:h2:tcp://localhost/mem:default
+#      driver:
+      url: jdbc:postgresql://localhost:5432/test
+      min-size: 3
+      max-size: 13
+    db-kind: postgresql
+
+
+
+  hibernate-orm:
+    database:
+      generation: drop-and-create
+
+
+
+  jaeger:
+    service-name: ${quarkus.application.name}
+    sampler-type: const
+    sampler-param: 1
+
+
+
+    enabled: true
+    metrics:
+      enabled: true
+
+  log:
+    category:
+      "org.hibernate":
+        level: DEBUG
+
+
+quarkus.log.console.format: '%d{HH:mm:ss} %-5p traceId=%X{traceId}, spanId=%X{spanId}, sampled=%X{sampled} [%c{2.}] (%t) %s%e%n'
